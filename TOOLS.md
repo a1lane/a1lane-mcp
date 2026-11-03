@@ -22,7 +22,7 @@ the user before those calls.
 | 12 | `get_verification_status` | Check if posts are verified live | read | ✓ | – | – |
 | 13 | `list_attention_items` | List posts that need attention | read | ✓ | – | – |
 | 14 | `resolve_attention` | Fix a delivery problem | publish | – | ✓ | ✓ |
-| 15 | `create_handoff_pack` | Get steps to finish a post in-app | read | ✓ | – | – |
+| 15 | `get_handoff_pack` | Get steps to finish a post in-app | read | ✓ | – | – |
 | 16 | `request_approval` | Send a draft for approval | write | – | – | – |
 | 17 | `list_posts` | List and filter posts | read | ✓ | – | – |
 | 18 | `get_delivery_digest` | Summarize recent deliveries | read | ✓ | – | – |
