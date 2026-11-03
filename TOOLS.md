@@ -1,4 +1,4 @@
-# A1 Lane MCP — tool inventory (contract v1.4)
+# A1 Lane MCP — tool inventory (contract v1.6)
 
 26 tools served at `https://a1lane.ai/mcp/v1`. `tools/list` is filtered by the
 token's OAuth scope: `read` sees 14 tools, `read write` sees 21,

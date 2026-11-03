@@ -17,7 +17,7 @@ can fetch and show you.
 - **Auth:** OAuth 2.0 — on first connect you sign in at a1lane.ai and approve
   access. No API key to copy. (A pasted workspace token also works for
   developer setups.)
-- **Tool contract:** v1.4 — 26 tools, listed in [TOOLS.md](TOOLS.md) and in
+- **Tool contract:** v1.6 — 26 tools, listed in [TOOLS.md](TOOLS.md) and in
   [`server.json`](server.json) (the official MCP Registry record).
 - **Product:** https://a1lane.ai · **MCP page:** https://a1lane.ai/mcp ·
   **Docs:** https://a1lane.ai/docs/mcp
