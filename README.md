@@ -3,8 +3,9 @@
 **One queue for every social platform, operable by your AI assistant.**
 
 A1 Lane is a hosted publishing service: connect your social accounts once, then
-schedule and publish posts to X, Bluesky, Mastodon, Discord and Telegram (plus
-LinkedIn with limited delivery) from a single queue. This repository is the
+schedule and publish posts and videos to YouTube, Instagram, TikTok, Facebook,
+X, LinkedIn, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram from
+a single queue. This repository is the
 public home of A1 Lane's **MCP server** — the connector that lets assistants
 like Claude, ChatGPT, Cursor and Grok work with your A1 Lane account directly.
 
@@ -17,7 +18,7 @@ can fetch and show you.
 - **Auth:** OAuth 2.0 — on first connect you sign in at a1lane.ai and approve
   access. No API key to copy. (A pasted workspace token also works for
   developer setups.)
-- **Tool contract:** v1.6 — 26 tools, listed in [TOOLS.md](TOOLS.md) and in
+- **Tool contract:** v1.7 — 26 tools, listed in [TOOLS.md](TOOLS.md) and in
   [`server.json`](server.json) (the official MCP Registry record).
 - **Product:** https://a1lane.ai · **MCP page:** https://a1lane.ai/mcp ·
   **Docs:** https://a1lane.ai/docs/mcp
