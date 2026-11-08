@@ -1,70 +1,81 @@
-# A1 Lane — MCP Server
+# A1 Lane MCP Server
 
-**One queue for every social platform, operable by your AI assistant.**
+A1 Lane is a social publishing service with its own queue, scheduler and delivery
+receipts. Through this connector an assistant can list the user's connected accounts,
+check each platform's posting rules and options, bring in media the user supplies,
+write and schedule drafts or a week of posts at once, send drafts for approval, read
+receipts and verification status, fix what failed, take a post down, and read
+engagement. It never publishes past an approval state or an uncertain outcome.
 
-A1 Lane is a hosted publishing service: connect your social accounts once, then
-schedule and publish posts and videos to YouTube, Instagram, TikTok, Facebook,
-X, LinkedIn, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram from
-a single queue. This repository is the
-public home of A1 Lane's **MCP server** — the connector that lets assistants
-like Claude, ChatGPT, Cursor and Grok work with your A1 Lane account directly.
+Draft-first tools for YouTube, X, Bluesky, Mastodon, Discord and Telegram, plus LinkedIn personal profiles; Facebook Pages, Instagram, Threads, TikTok and Pinterest remain unavailable to new accounts until their platform approvals are granted and A1 Lane enables them.
 
-Every post A1 Lane sends is proven, not assumed: a post is marked live only
-after A1 Lane reads it back from the platform itself. Each delivery carries a
-**receipt** — the platform read-back and the live link — which your assistant
-can fetch and show you.
+Listing in this directory is not an approval by any social platform. LinkedIn
+Community Management access (for Company Pages) is a separate permission still in
+review; personal-profile connections are available today.
 
-- **Endpoint:** `https://a1lane.ai/mcp/v1` (Streamable HTTP)
-- **Auth:** OAuth 2.0 — on first connect you sign in at a1lane.ai and approve
-  access. No API key to copy. (A pasted workspace token also works for
-  developer setups.)
-- **Tool contract:** v1.7 — 26 tools, listed in [TOOLS.md](TOOLS.md) and in
-  [`server.json`](server.json) (the official MCP Registry record).
-- **Product:** https://a1lane.ai · **MCP page:** https://a1lane.ai/mcp ·
-  **Docs:** https://a1lane.ai/docs/mcp
+This repository is the public home of the registry record (`server.json`), the tool
+inventory (`TOOLS.md`) and client packaging. The A1 Lane service itself is hosted and
+is not distributed here.
 
-<!-- Glama badge goes here once the listing is claimed and scored. -->
+## Delivery receipts
 
-## Connect it
+Every post gets a delivery receipt for each destination it was sent to. Where the
+platform offers a way to read the post back, A1 Lane checks it on the platform before
+marking that destination live. Where it doesn't (Telegram, for example), the receipt
+records the platform's send response instead and the destination is marked
+Delivered (limited). Read-back is per platform, not universal.
 
-**Claude** — Settings → Connectors → Add custom connector →
-`https://a1lane.ai/mcp/v1`, then approve in the browser.
+YouTube is fully available, including public uploads. Taking a YouTube video down is a
+hand-off by design: A1 Lane points you to the video so you delete it in YouTube
+yourself; it does not delete YouTube videos from inside the product.
 
-**ChatGPT** — Settings → Connectors → add the same URL and approve. (Domain
-verification is served by A1 Lane.)
+## Connect
 
-**Cursor** — one-click: use the "Add to Cursor" deep link on
-https://a1lane.ai/mcp, or add the URL as a remote MCP server in
-`~/.cursor/mcp.json`:
+- Endpoint: `https://a1lane.ai/mcp/v1` (Streamable HTTP)
+- Sign-in: OAuth 2.1 with PKCE (S256). Your client opens a1lane.ai, you sign in and
+  approve one workspace and its scopes, and you're back in your client. A workspace
+  token (`plt_…`) also works for developer setups.
+- Official MCP Registry: `ai.a1lane/a1lane`
 
-```json
-{ "mcpServers": { "a1lane": { "url": "https://a1lane.ai/mcp/v1" } } }
-```
+Exact, current steps per client (kept on one page so they can't drift here):
 
-**Grok** — grok.com/connectors → New Connector → Custom → the same URL.
+- Claude: https://a1lane.ai/mcp#claude
+- ChatGPT: https://a1lane.ai/mcp#chatgpt
+- Cursor: https://a1lane.ai/mcp#cursor
+- Any other MCP client: https://a1lane.ai/mcp#any-client
 
-**Any MCP client** — point it at the endpoint; OAuth discovery is automatic
-(`/.well-known/oauth-protected-resource`). Tokens are scoped per workspace:
-`read` sees 14 tools, `read write` sees 21, `read write publish` sees all 26.
+## Tools
+
+26 tools in contract v1.8; your token's scope decides which you see (read 14,
+read + write 21, read + write + publish 26). Full list with annotations:
+[`TOOLS.md`](TOOLS.md) and https://a1lane.ai/docs/mcp.
+
+| Area | Tools |
+|---|---|
+| Accounts and platform rules | `list_accounts`, `get_platform_schema` |
+| Media | `upload_media`, `create_upload_link`, `get_upload_status` |
+| Drafts and scheduling | `create_draft`, `update_draft_settings`, `schedule_draft`, `cancel_scheduled`, `delete_draft`, `submit_batch`, `get_batch_status`, `request_approval` |
+| Receipts and delivery | `get_receipt`, `get_verification_status`, `list_posts`, `get_delivery_digest` |
+| Fixing and control | `list_attention_items`, `resolve_attention`, `get_handoff_pack`, `pause_workspace`, `unpublish_post` |
+| Engagement | `get_post_engagement`, `get_engagement_rollup`, `get_best_times`, `get_engagement_coverage` |
+
+Tools that send or remove something are annotated as destructive, so clients that
+honour MCP tool annotations ask you to confirm first.
 
 ## Try asking your assistant
 
 - "What accounts do I have connected in A1 Lane?"
 - "Draft a post for my Bluesky and Mastodon accounts: …"
 - "Schedule that for tomorrow at 9am."
-- "Did yesterday's posts actually go live? Show me the receipts."
+- "Did yesterday's posts go out? Show me the receipts."
 - "What needs my attention in A1 Lane?"
 - "How did my posts do this week?"
 
-Draft-first by design: assistants create drafts, and anything destructive or
-public (publishing, deleting a live post, force-retrying a delivery) is
-annotated so your client asks you to confirm first.
+## Links
 
-## What this repo is
+Docs https://a1lane.ai/docs/mcp · Privacy https://a1lane.ai/legal/privacy ·
+Terms https://a1lane.ai/legal/terms · Status https://a1lane.ai/status ·
+Support support@a1lane.ai
 
-The visibility and filing repo for the A1 Lane MCP surface: the registry
-record, the tool inventory, and client packaging. The A1 Lane service itself
-is hosted software and is not distributed from this repository.
-
-Support: https://a1lane.ai/support · Privacy: https://a1lane.ai/legal/privacy ·
-Terms: https://a1lane.ai/legal/terms · Status: https://a1lane.ai/status
+The MIT license in this repository covers its documentation and configuration files.
+The hosted A1 Lane service is governed by https://a1lane.ai/legal/terms.
