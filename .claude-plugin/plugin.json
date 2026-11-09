@@ -1,0 +1,13 @@
+{
+  "author": {
+    "name": "A1Lane LLC",
+    "url": "https://a1lane.ai"
+  },
+  "description": "Draft, schedule and publish social posts from Claude, with a delivery receipt for every destination. Pairs the A1 Lane MCP connector with workflow skills for drafting and approval, validated scheduling, and delivery-receipt checks.",
+  "displayName": "A1 Lane",
+  "license": "Proprietary",
+  "name": "a1-lane",
+  "version": "1.8.0",
+  "privacyPolicyUrl": "https://a1lane.ai/privacy",
+  "icon": ".claude-plugin/icon.png"
+}
