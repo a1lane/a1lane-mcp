@@ -7,7 +7,7 @@
   "displayName": "A1 Lane",
   "license": "Proprietary",
   "name": "a1-lane",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "privacyPolicyUrl": "https://a1lane.ai/privacy",
   "icon": ".claude-plugin/icon.png"
 }

@@ -1,6 +1,6 @@
 # Claude Directory plugin submission — notes for the A1 Lane bundle
 
-Status: bundle assembled 2026-11-08. **Not submitted.** This file records
+Status: bundle assembled 2026-11-08. **Not submitted.** Synced to MCP v1.9 (package version 1.9.0, 31 tools) on 2026-11-11. This file records
 what Anthropic's plugin submission requires (from Anthropic's official
 plugin documentation, claude.com/docs/plugins/build, updated 2026-10-30)
 and what remains before Pax can file it.
@@ -22,12 +22,11 @@ and Enterprise plans an Owner submits.
 - `.claude-plugin/plugin.json` — manifest. Only the manifest lives in
   `.claude-plugin/`; everything else sits at the plugin root, per the docs.
   Fields used: `name` (`a1-lane` — permanent identity, never change after
-  release), `displayName`, `version` (`1.8.0`, matching the frozen MCP
-  surface), `description`, `author`, `license`.
+  release), `displayName`, `version` (`1.9.0`, matching the MCP surface), `description`, `author`, `license`.
 - `.mcp.json` — the connector, referenced by URL. No secrets in this file
   (every installer receives the plugin's files): sign-in happens through
   the server's own OAuth flow.
-- `skills/` — four workflow skills, built only on the real v1.8 tools:
+- `skills/` — four workflow skills, built only on the real v1.9 tools:
   - `draft-approve-publish` — draft → approval → publish → receipt.
   - `schedule-with-validation` — per-destination rule checks before
     scheduling (uses `get_platform_schema` — see the tool-name note below).
@@ -93,8 +92,9 @@ and Enterprise plans an Owner submits.
 ## Tool-name correction recorded here
 
 The build brief for skill (b) named a `get_posting_requirements` tool.
-The frozen v1.8 surface has no such tool — the posting-rules tool is
-`get_platform_schema` (authoritative 26-tool list in the ChatGPT filing
-package's SKILL.md, verified 26/26 live on 2026-11-08). The skill uses
-`get_platform_schema` and says so in its own text. No tool changes are
-proposed; the surface stays frozen.
+The MCP surface has no such tool — the posting-rules tool is
+`get_platform_schema` (verified live on 2026-11-08 against the then-current
+26-tool surface). The skill uses `get_platform_schema` and says so in its
+own text. The surface has since moved to v1.9 (31 tools) under the founder's
+2026-11-11 ruling that version discipline does not bind while there are no
+external MCP users; the bundle was re-synced to the v1.9 names the same day.

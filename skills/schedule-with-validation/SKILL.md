@@ -9,9 +9,9 @@ Scheduling is where platform rules bite: a caption that fits one platform
 fails on another. Validate every destination **before** the draft is
 created, not after it errors.
 
-> Tool-name note: the frozen v1.8 surface checks posting rules with
+> Tool-name note: the v1.9 surface checks posting rules with
 > `get_platform_schema` (a platform's caption limits, media requirements
-> and options). There is no `get_posting_requirements` tool in v1.8.
+> and options). There is no `get_posting_requirements` tool.
 
 ## Steps
 
@@ -32,7 +32,7 @@ created, not after it errors.
    `update_draft_settings` for any per-destination caption, media or
    timing adjustments the validation step produced.
 5. **Approval, then schedule.** Call `request_approval`; only after the
-   human approval lands, call `schedule_draft` with the agreed time (or
+   human approval lands, call `publish_post` with the agreed time (or
    the next free slot). To change plans before it sends, use
    `update_draft_settings`; to stop it entirely, `cancel_scheduled` —
    both are safe because nothing has been sent yet.

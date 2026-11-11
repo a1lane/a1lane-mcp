@@ -15,8 +15,8 @@ user. Report only the metrics each platform actually returns.
 2. **How it performed.** Call `get_engagement_rollup` for totals across
    accounts and posts, and `get_post_engagement` for any single post the
    user asks about (views, likes, comments, shares, per destination).
-3. **Say what isn't measured.** Call `get_engagement_coverage` and state
-   plainly which metrics each platform does not report — never present a
+3. **Say what isn't measured.** Call `get_platform_schema` (which metrics each platform
+   reports is part of its answer) and state plainly which metrics each platform does not report — never present a
    missing metric as zero, and never compare platforms on a metric only
    one of them reports.
 4. **When to post next.** Call `get_best_times` per account and turn it

@@ -18,7 +18,7 @@ call a destination live until its receipt says the platform confirmed it.
    `get_platform_schema` and write within its caption limits, media
    requirements and options. Never guess a platform's limits.
 3. **Bring in media, if any.** If the user supplies a public https link,
-   call `upload_media`. If they have a file on their phone or computer,
+   call `import_media`. If they have a file on their phone or computer,
    call `create_upload_link` and check arrival with `get_upload_status`.
 4. **Create the draft.** Call `create_draft` for the chosen accounts, then
    show the user the exact caption, media and destinations and wait for
@@ -26,7 +26,7 @@ call a destination live until its receipt says the platform confirmed it.
 5. **Send it for approval.** Call `request_approval`. The draft now sits in
    the workspace's approval flow — a human approves it in A1 Lane.
 6. **Publish only after approval.** Once the user confirms the draft is
-   approved, call `schedule_draft` to publish it now. If it is not yet
+   approved, call `publish_post` to publish it now. If it is not yet
    approved, wait; do not try to publish around the gate.
 7. **Report the receipt.** Call `get_receipt` (and
    `get_verification_status` where read-back matters) and report each

@@ -38,7 +38,7 @@ proved. Keep that promise in how you report and in what you do next.
 5. **Taking something down.** If the user wants a live post removed, get
    their explicit confirmation in the conversation first, then call
    `unpublish_post`, then verify with `get_receipt` /
-   `get_verification_status` that it is gone. `delete_draft` is different:
+   `get_verification_status` that it is gone. `delete_post_record` is different:
    it only deletes A1 Lane's own record and never removes anything from a
    platform — say so if the user confuses the two.
 
