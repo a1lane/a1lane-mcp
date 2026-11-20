@@ -1,0 +1,7 @@
+extensions:
+  a1lane:
+    name: "A1 Lane"
+    type: streamable_http
+    uri: https://a1lane.ai/mcp/v1
+    enabled: true
+    timeout: 300

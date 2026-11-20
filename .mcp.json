@@ -1,1 +1,8 @@
-{"mcpServers":{"a1lane":{"type":"http","url":"https://a1lane.ai/mcp/v1"}}}
+{
+  "mcpServers": {
+    "a1lane": {
+      "type": "http",
+      "url": "https://a1lane.ai/mcp/v1"
+    }
+  }
+}

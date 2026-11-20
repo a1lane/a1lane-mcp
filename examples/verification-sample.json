@@ -1,0 +1,31 @@
+{
+  "posts": [
+    {
+      "postId": "post_sample",
+      "status": "published",
+      "destinations": [
+        {
+          "id": "dst_sample_youtube",
+          "platform": "youtube",
+          "status": "published",
+          "verified": true,
+          "evidence": "readback",
+          "url": "https://youtu.be/SAMPLE00000",
+          "stage": null,
+          "message": null
+        },
+        {
+          "id": "dst_sample_linkedin",
+          "platform": "linkedin",
+          "status": "published",
+          "verified": false,
+          "evidence": "send_response",
+          "url": null,
+          "stage": null,
+          "message": "LinkedIn accepted the post and returned its ID. No LinkedIn delivery has been confirmed end to end yet, so this receipt records LinkedIn's response and doesn't claim the live post was checked."
+        }
+      ],
+      "allVerified": false
+    }
+  ]
+}
