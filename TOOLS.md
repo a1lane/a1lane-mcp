@@ -1,6 +1,6 @@
-# A1 Lane MCP — tool inventory (contract v1.10)
+# A1 Lane MCP — tool inventory (contract v1.12)
 
-35 tools served at `https://a1lane.ai/mcp/v1`. `tools/list` is filtered by the token's scope: `read` sees 19, `read write` sees 27, `read write publish` sees 34, and all four scopes (adding `accounts`) see all 35. The annotations below are the values the server serves; "destructive" includes public sends that cannot be recalled, so clients that honour annotations ask before those calls.
+37 tools served at `https://a1lane.ai/mcp/v1`. `tools/list` is filtered by the token's scope: `read` sees 20, `read write` sees 28, `read write publish` sees 36, and all four scopes (adding `accounts`) see all 37. The annotations below are the values the server serves; "destructive" includes public sends that cannot be recalled, so clients that honour annotations ask before those calls.
 
 Generated from `postlane/mcp.py` by `tools/public_repo_pack.py` in the A1 Lane product repo; do not edit by hand.
 
@@ -29,18 +29,20 @@ Generated from `postlane/mcp.py` by `tools/public_repo_pack.py` in the A1 Lane p
 | 21 | `list_accounts` | List connected social accounts | read | ✓ | – | – | ✓ |
 | 22 | `list_attention_items` | List posts that need attention | read | ✓ | – | – | ✓ |
 | 23 | `list_media` | List the A1 Lane media library | read | ✓ | – | – | ✓ |
-| 24 | `list_posts` | List and filter posts | read | ✓ | – | – | ✓ |
-| 25 | `list_repeats` | List repeating posts | read | ✓ | – | – | ✓ |
-| 26 | `pause_workspace` | Pause or resume publishing | publish | – | – | – | ✓ |
-| 27 | `publish_post` | Publish or schedule a draft | publish | – | ✓ | ✓ | – |
-| 28 | `repeat_post` | Repeat a post on a schedule | publish | – | ✓ | ✓ | – |
-| 29 | `request_approval` | Send a draft for approval | write | – | – | – | – |
-| 30 | `resolve_attention` | Fix a delivery problem | publish | – | ✓ | ✓ | – |
-| 31 | `search_instagram_audio` | Search Instagram audio for a Reel | read | ✓ | – | ✓ | ✓ |
-| 32 | `set_repeat_state` | Pause, resume or stop a repeat | publish | – | ✓ | – | ✓ |
-| 33 | `submit_batch` | Create many posts at once | write | – | ✓ | ✓ | – |
-| 34 | `unpublish_post` | Delete a live post from platforms | publish | – | ✓ | ✓ | ✓ |
-| 35 | `update_draft_settings` | Edit a draft or scheduled post | write | – | ✓ | – | – |
+| 24 | `list_post_comments` | Read comments on a published post | read | ✓ | – | ✓ | ✓ |
+| 25 | `list_posts` | List and filter posts | read | ✓ | – | – | ✓ |
+| 26 | `list_repeats` | List repeating posts | read | ✓ | – | – | ✓ |
+| 27 | `pause_workspace` | Pause or resume publishing | publish | – | – | – | ✓ |
+| 28 | `publish_post` | Publish or schedule a draft | publish | – | ✓ | ✓ | – |
+| 29 | `repeat_post` | Repeat a post on a schedule | publish | – | ✓ | ✓ | – |
+| 30 | `reply_to_comment` | Reply to a comment on a post | publish | – | ✓ | ✓ | – |
+| 31 | `request_approval` | Send a draft for approval | write | – | – | – | – |
+| 32 | `resolve_attention` | Fix a delivery problem | publish | – | ✓ | ✓ | – |
+| 33 | `search_instagram_audio` | Search Instagram audio for a Reel | read | ✓ | – | ✓ | ✓ |
+| 34 | `set_repeat_state` | Pause, resume or stop a repeat | publish | – | ✓ | – | ✓ |
+| 35 | `submit_batch` | Create many posts at once | write | – | ✓ | ✓ | – |
+| 36 | `unpublish_post` | Delete a live post from platforms | publish | – | ✓ | ✓ | ✓ |
+| 37 | `update_draft_settings` | Edit a draft or scheduled post | write | – | ✓ | – | – |
 
 ## What each tool is for
 
@@ -64,16 +66,18 @@ Each line is the tool's title and the opening sentence of the description the se
 - `get_receipt` — **Get a post's delivery receipt.** Use when the user asks whether a specific post went out, where it is live, what its link is, or what happened to it.
 - `get_upload_status` — **Check an upload link.** Use after create_upload_link to see whether the user's file has arrived.
 - `get_verification_status` — **Check if posts are verified live.** Use when the user asks whether their posts actually went live, or wants a post they just published double-checked.
-- `get_workspace` — **Get A1 Lane workspace, plan and limits.** Use when the user asks about their A1 Lane workspace: which one this is, its plan, whether they can create another workspace, how many social accounts or queued posts it can still hold, whether posts need approval, its timezone, or why publishing is paused.
+- `get_workspace` — **Get A1 Lane workspace, plan and limits.** Use when the user asks about their A1 Lane workspace: which one this is, its plan, whether they can create another workspace, how many accounts or queued posts it can still hold, whether posts need approval, its timezone, or why publishing is paused.
 - `import_media` — **Import media from a link.** Use when the user gives a public https link to a video or image file they want to post.
 - `list_accounts` — **List connected social accounts.** Use when the user asks which social media accounts are connected to A1 Lane for posting, which account to post to, whether one needs reconnecting, or how to connect a new one.
 - `list_attention_items` — **List posts that need attention.** Use when the user asks what needs fixing, why a post failed, what went wrong, or what is waiting on them.
 - `list_media` — **List the A1 Lane media library.** Use when the user asks what videos or images are already in their A1 Lane media library, or wants to reuse a file they uploaded earlier instead of uploading it again.
+- `list_post_comments` — **Read comments on a published post.** Use when the user asks what people said on one of their published posts, or which comments need an answer.
 - `list_posts` — **List and filter posts.** Use when the user asks to see the posts they drafted, scheduled or published through A1 Lane: drafts, what is scheduled or queued, what was published, or what failed.
 - `list_repeats` — **List repeating posts.** Use when the user asks which posts repeat, when the next repeat goes out, how many repeats have been posted, or why a repeat stopped.
 - `pause_workspace` — **Pause or resume publishing.** Use when the user asks to stop all posting for now, put publishing on hold, or start again.
 - `publish_post` — **Publish or schedule a draft.** Use when the user asks to post, publish or share a saved draft: right now, at a specific date and time, or in an account's next free posting slot.
-- `repeat_post` — **Repeat a post on a schedule.** Use when the user asks to repeat, recycle or re-share a post on a schedule, for example every 7 days, every 2 weeks until a date, or 5 times.
+- `repeat_post` — **Repeat a post on a schedule.** Use when the user asks to repeat, recycle or re-share a post on a schedule, for example every 7 days or 5 times.
+- `reply_to_comment` — **Reply to a comment on a post.** Use when the user asks to answer or reply to a comment on their own published post.
 - `request_approval` — **Send a draft for approval.** Use when the user asks to send a draft to their team, client or manager for review or sign-off before it is posted.
 - `resolve_attention` — **Fix a delivery problem.** Use when the user asks to fix, retry or re-send a failed post, or to clear an item from list_attention_items.
 - `search_instagram_audio` — **Search Instagram audio for a Reel.** Use when the user wants music, a trending sound or other audio on an Instagram Reel.
