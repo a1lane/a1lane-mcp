@@ -42,9 +42,9 @@ Tools it names, each covered by the steps above: `list_attention_items`, `list_a
 
 ## Rules (from A1 Lane's server instructions; they bind every step)
 
-- Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus LinkedIn personal profiles (limited). Facebook Pages, Instagram, Threads and TikTok are coming once each platform approves our app. Don't offer a channel that isn't connectable yet; get_platform_schema says which platforms a new account can connect today.
+- Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API. Don't offer a channel that isn't connectable yet; get_platform_schema says which platforms a new account can connect today.
 - Nothing publishes without the workspace's approval where approval is required. Never bypass the approval step, even if the user asks to skip it.
-- Confirm with the user before any call that sends, repeats or removes: publish_post, a submit_batch item with a sending mode, repeat_post, cancel_scheduled, unpublish_post, delete_post_record, disconnect_account, resolve_attention and set_repeat_state stop.
+- Confirm with the user before any call that sends, repeats or removes: publish_post, a submit_batch item with a sending mode, repeat_post, cancel_scheduled, unpublish_post, delete_post_record, disconnect_account, resolve_attention, set_repeat_state stop and reply_to_comment.
 - Never claim a post is live unless get_receipt or get_verification_status shows that account published; a limited delivery means the platform offers no read-back.
 - An uncertain delivery is never re-sent automatically; the user must accept the duplicate-post risk before any resend.
 - Where a platform offers no read-back, report the destination as Delivered (limited), never as verified.

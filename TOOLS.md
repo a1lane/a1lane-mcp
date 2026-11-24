@@ -1,4 +1,4 @@
-# A1 Lane MCP — tool inventory (contract v1.12)
+# A1 Lane MCP — tool inventory (contract v1.13)
 
 37 tools served at `https://a1lane.ai/mcp/v1`. `tools/list` is filtered by the token's scope: `read` sees 20, `read write` sees 28, `read write publish` sees 36, and all four scopes (adding `accounts`) see all 37. The annotations below are the values the server serves; "destructive" includes public sends that cannot be recalled, so clients that honour annotations ask before those calls.
 

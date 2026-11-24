@@ -2,7 +2,7 @@
 
 A1 Lane is a social publishing service with its own queue, scheduler and delivery receipts. It uploads and publishes video and posts through each platform's official API, and marks a destination live only when read-back from the platform confirms it; channels without read-back are marked Delivered (limited). Through this connector an assistant can list the user's connected accounts, check each platform's posting rules and options, bring in media the user supplies, write and schedule drafts or a week of posts at once, send drafts for approval, read receipts and verification status, investigate failures and apply supported recovery actions, take a post down, and read engagement where supported. It does not bypass required approvals or automatically retry uncertain deliveries.
 
-Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). Threads and TikTok are coming once each platform approves our app.
+Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
 
 A listing in an assistant's directory isn't any platform's approval. LinkedIn Community Management access (for Company Pages) is a separate permission still in review; personal-profile connections are available today.
 
@@ -11,14 +11,14 @@ inventory (`TOOLS.md`), and client packaging: a Claude Code plugin and marketpla
 extension, a Cursor plugin manifest and installable workflow skills. The A1 Lane service itself is
 hosted and is not distributed here; there is nothing to run locally.
 
-- Endpoint: `https://a1lane.ai/mcp/v1` (Streamable HTTP), contract v1.12, 37 tools
+- Endpoint: `https://a1lane.ai/mcp/v1` (Streamable HTTP), contract v1.13, 37 tools
 - Sign-in: OAuth 2.1 with PKCE. Your client opens a1lane.ai, you sign in and approve one workspace and its scopes.
 - Listed in the official MCP Registry as ai.a1lane/a1lane. A1 Lane is available in Claude's connector directory.
 
 ## Install
 
 Exact, current steps for every client live on one page: https://a1lane.ai/mcp. Each section below says
-whether we have run that connect ourselves. Whichever client you use: Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). Threads and TikTok are coming once each platform approves our app.
+whether we have run that connect ourselves. Whichever client you use: Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
 
 ### Claude (claude.ai and Claude Desktop)
 
@@ -260,7 +260,7 @@ A sample `get_verification_status` result (a sample, not a real post; the `verif
 
 ## Tools
 
-37 tools in contract v1.12. 20 are read-only and 11 are
+37 tools in contract v1.13. 20 are read-only and 11 are
 annotated destructive (they send, remove or overwrite something), so clients that honour
 MCP tool annotations ask you before those calls. The server's instructions also tell the assistant
 to confirm with you before any call that sends or removes. Annotations per tool: [`TOOLS.md`](TOOLS.md).
