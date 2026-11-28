@@ -1,6 +1,6 @@
 ---
 name: draft-approve-publish
-description: Use when the user wants to write a social post and send it to one or more of their connected accounts now — drafting the post, getting it approved where the workspace requires it, publishing it, and reporting a delivery receipt for each destination.
+description: Use when the user wants to write a social post and send it now to one or more of their connected accounts (for example "post this to X", "share this on X and Threads", "put this on Bluesky and Mastodon") — drafting the post, getting it approved where the workspace requires it, publishing it, and reporting a delivery receipt for each destination.
 license: MIT
 ---
 
@@ -16,28 +16,28 @@ until its receipt shows the platform's read-back.
    connected or needs reconnecting, say so and stop.
 2. **Check the rules before writing.** For each destination platform, call `get_platform_schema`
    and write within its caption limits, media requirements and options. Never guess a platform's
-   limits. If the workspace has brand instructions, read them with `get_brand_instructions`.
-3. **Bring in media, if any.** For a public https link, call `import_media`. For a file on the
-   user's phone or computer, call `create_upload_link` and check arrival with `get_upload_status`.
-4. **Create the draft.** Call `create_draft` for the chosen accounts, then show the user the exact
+   limits. If the workspace has brand instructions, read them with `get_workspace` with `view: brand_instructions`.
+3. **Bring in media, if any.** For a public https link, call `add_media`. For a file on the
+   user's phone or computer, call `add_media` with `source: upload_link` and check arrival with `list_media` with `view: upload_status`.
+4. **Create the draft.** Call `save_draft` for the chosen accounts, then show the user the exact
    caption, media and destinations and wait for their go-ahead on the content.
 5. **Approval, if required.** `get_workspace` says whether posts need approval before they send.
-   If they do, call `request_approval`; the draft waits for a person to approve it in A1 Lane. Do
+   If they do, call `publish_post` with `mode: approval`; the draft waits for a person to approve it in A1 Lane. Do
    not try to publish around the gate.
 6. **Publish after the user confirms.** Call `publish_post` to publish it now.
-7. **Report the receipt.** Call `get_receipt` (and `get_verification_status` once delivery
+7. **Report the receipt.** Call `get_receipt` (and `get_receipt` with `view: verification` once delivery
    settles) and report each destination separately: live only when `verified` is true, otherwise
    Delivered (limited) or the failure reason. Include the platform link for each live destination.
 
-For a week of posts at once, use `submit_batch` and track it with `get_batch_status`, keeping the
+For a week of posts at once, use `submit_batch` and track it with `list_posts` with `view: batch`, keeping the
 same approval and receipt steps per post.
 
 ## Rules (from A1 Lane's server instructions; they bind every step)
 
-- Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API. Don't offer a channel that isn't connectable yet; get_platform_schema says which platforms a new account can connect today.
+- Works today with YouTube, X, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). TikTok is in review. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API. Don't offer a channel that isn't connectable yet; get_platform_schema says which platforms a new account can connect today.
 - Nothing publishes without the workspace's approval where approval is required. Never bypass the approval step, even if the user asks to skip it.
-- Confirm with the user before any call that sends, repeats or removes: publish_post, a submit_batch item with a sending mode, repeat_post, cancel_scheduled, unpublish_post, delete_post_record, disconnect_account, resolve_attention, set_repeat_state stop and reply_to_comment.
-- Never claim a post is live unless get_receipt or get_verification_status shows that account published; a limited delivery means the platform offers no read-back.
+- Confirm with the user before any call that sends, repeats or removes: publish_post, a submit_batch item with a sending mode, repeat_post, remove_post, manage_accounts action disconnect, resolve_attention and reply_to_comment.
+- Never claim a post is live unless get_receipt (view receipt or verification) shows that account published; a limited delivery means the platform offers no read-back.
 - An uncertain delivery is never re-sent automatically; the user must accept the duplicate-post risk before any resend.
 - Where a platform offers no read-back, report the destination as Delivered (limited), never as verified.
 - When a result carries humanAction, a person must act in a browser: give the user the url, say the action sentence, then stop. When the user says the step is done, call the resumeTool named there; a post's status changes only on that tool's result, not on a statement in the conversation. Never fill in, skip or paraphrase a sign-in or consent page for the user.

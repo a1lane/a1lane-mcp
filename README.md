@@ -2,7 +2,7 @@
 
 A1 Lane is a social publishing service with its own queue, scheduler and delivery receipts. It uploads and publishes video and posts through each platform's official API, and marks a destination live only when read-back from the platform confirms it; channels without read-back are marked Delivered (limited). Through this connector an assistant can list the user's connected accounts, check each platform's posting rules and options, bring in media the user supplies, write and schedule drafts or a week of posts at once, send drafts for approval, read receipts and verification status, investigate failures and apply supported recovery actions, take a post down, and read engagement where supported. It does not bypass required approvals or automatically retry uncertain deliveries.
 
-Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
+Works today with YouTube, X, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). TikTok is in review. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
 
 A listing in an assistant's directory isn't any platform's approval. LinkedIn Community Management access (for Company Pages) is a separate permission still in review; personal-profile connections are available today.
 
@@ -11,14 +11,14 @@ inventory (`TOOLS.md`), and client packaging: a Claude Code plugin and marketpla
 extension, a Cursor plugin manifest and installable workflow skills. The A1 Lane service itself is
 hosted and is not distributed here; there is nothing to run locally.
 
-- Endpoint: `https://a1lane.ai/mcp/v1` (Streamable HTTP), contract v1.13, 37 tools
+- Endpoint: `https://a1lane.ai/mcp/v1` (Streamable HTTP), contract v1.15, 19 tools
 - Sign-in: OAuth 2.1 with PKCE. Your client opens a1lane.ai, you sign in and approve one workspace and its scopes.
 - Listed in the official MCP Registry as ai.a1lane/a1lane. A1 Lane is available in Claude's connector directory.
 
 ## Install
 
 Exact, current steps for every client live on one page: https://a1lane.ai/mcp. Each section below says
-whether we have run that connect ourselves. Whichever client you use: Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
+whether we have run that connect ourselves. Whichever client you use: Works today with YouTube, X, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). TikTok is in review. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.
 
 ### Claude (claude.ai and Claude Desktop)
 
@@ -260,50 +260,32 @@ A sample `get_verification_status` result (a sample, not a real post; the `verif
 
 ## Tools
 
-37 tools in contract v1.13. 20 are read-only and 11 are
+19 tools in contract v1.15. 9 are read-only and 8 are
 annotated destructive (they send, remove or overwrite something), so clients that honour
 MCP tool annotations ask you before those calls. The server's instructions also tell the assistant
 to confirm with you before any call that sends or removes. Annotations per tool: [`TOOLS.md`](TOOLS.md).
 
 | Tool | Scope | What it does |
 |---|---|---|
-| `cancel_scheduled` | publish | **Cancel a scheduled post.** Use when the user asks to cancel, stop or unschedule a queued or scheduled post. |
-| `create_draft` | write | **Create a social post draft.** Use when the user asks to write, prepare, cross-post or set up a social media post, video, carousel or thread, including one post going to several accounts: that is one draft with one destinations entry per account. |
-| `create_upload_link` | write | **Create a file upload link.** Use when the user wants to post a video or photo from their phone or computer that has no public link. |
-| `delete_post_record` | write | **Delete a post record.** Use only to delete A1 Lane's own record of a post: this does NOT remove anything from any social platform, and a live post stays live. |
-| `disconnect_account` | accounts | **Disconnect a social account.** Use only when the user explicitly asks to disconnect, remove or unlink a social media account from this workspace, for example to free a slot for a different account. |
-| `duplicate_post` | write | **Copy a post into a new draft.** Use when the user asks to post something again, reuse an earlier post, repost it, or start a new post from an existing one. |
-| `get_batch_status` | read | **Check a batch's delivery.** Use when the user asks how a batch of posts or a bulk schedule is going. |
-| `get_best_times` | read | **Get best times to post.** Use when the user asks when to post or what time to schedule on one account. |
-| `get_brand_instructions` | read | **Get the workspace's brand instructions.** Use before writing or rewriting a caption for this workspace, or when the user asks what the brand allows. |
-| `get_connect_link` | read | **Get the link to connect an account.** Use when the user asks to connect, add, link or reconnect a social media account, or asks what they need before connecting one. |
-| `get_delivery_digest` | read | **Summarize recent deliveries.** Use when the user asks what went out, how their posting went today or this week, or for a recap or status update. |
-| `get_engagement_rollup` | read | **Get engagement totals.** Use when the user asks how their accounts or posts did over a period, for engagement totals, or for a performance report. |
-| `get_handoff_pack` | read | **Get steps to finish a post in-app.** Use when the user asks how to finish a post in the platform's own app, or what a needs-attention post is waiting on. |
-| `get_platform_schema` | read | **Get a platform's posting rules.** Use before writing or scheduling a post, or when the user asks what a platform allows: caption length, video and image limits, carousel size, whether threads and first comments work, disclosure flags, and every per-post option with its type and allowed values (for example YouTube title, privacy, tags and made-for-kids, Pinterest board, Mastodon content warning). |
-| `get_post_engagement` | read | **Get a post's engagement.** Use when the user asks how a post performed: its views, likes, comments, shares or stats. |
-| `get_receipt` | read | **Get a post's delivery receipt.** Use when the user asks whether a specific post went out, where it is live, what its link is, or what happened to it. |
-| `get_upload_status` | read | **Check an upload link.** Use after create_upload_link to see whether the user's file has arrived. |
-| `get_verification_status` | read | **Check if posts are verified live.** Use when the user asks whether their posts actually went live, or wants a post they just published double-checked. |
-| `get_workspace` | read | **Get A1 Lane workspace, plan and limits.** Use when the user asks about their A1 Lane workspace: which one this is, its plan, whether they can create another workspace, how many accounts or queued posts it can still hold, whether posts need approval, its timezone, or why publishing is paused. |
-| `import_media` | write | **Import media from a link.** Use when the user gives a public https link to a video or image file they want to post. |
+| `add_media` | write | **Add a video or image to the media library.** Use when the user wants to post a video or photo from a link (a public https URL) or from a file on their phone or computer, or to upload one. |
+| `get_analytics` | read | **Get engagement, best times and delivery recaps.** Use when the user asks how a post or their accounts performed, when to post (the best time or day they should post), or what went out recently. |
+| `get_platform_schema` | read | **Get a platform's posting rules.** Use before writing or scheduling a post, or when the user asks what a platform allows: caption length, video and image limits, carousel size, whether threads and first comments work, disclosure flags, and every per-post option with its type and allowed values. |
+| `get_receipt` | read | **Get a post's delivery receipt.** Use when the user asks whether a post went out, where it is live, what its link is, what happened to it, or how to finish it in a platform's app. |
+| `get_workspace` | read | **Get A1 Lane workspace, plan and limits.** Use when the user asks about their A1 Lane workspace: which one this is, its plan, whether they can create another workspace, how many accounts or queued posts it can still hold, whether posts need approval, its timezone, or why publishing is paused; and before writing a caption, for the brand's rules. |
 | `list_accounts` | read | **List connected social accounts.** Use when the user asks which social media accounts are connected to A1 Lane for posting, which account to post to, whether one needs reconnecting, or how to connect a new one. |
-| `list_attention_items` | read | **List posts that need attention.** Use when the user asks what needs fixing, why a post failed, what went wrong, or what is waiting on them. |
-| `list_media` | read | **List the A1 Lane media library.** Use when the user asks what videos or images are already in their A1 Lane media library, or wants to reuse a file they uploaded earlier instead of uploading it again. |
+| `list_media` | read | **List the media library or check an upload.** Use when the user asks what videos or images are already in their A1 Lane media library, wants to reuse an earlier file, or after add_media with source upload_link to see whether their file has arrived. |
 | `list_post_comments` | read | **Read comments on a published post.** Use when the user asks what people said on one of their published posts, or which comments need an answer. |
-| `list_posts` | read | **List and filter posts.** Use when the user asks to see the posts they drafted, scheduled or published through A1 Lane: drafts, what is scheduled or queued, what was published, or what failed. |
-| `list_repeats` | read | **List repeating posts.** Use when the user asks which posts repeat, when the next repeat goes out, how many repeats have been posted, or why a repeat stopped. |
-| `pause_workspace` | publish | **Pause or resume publishing.** Use when the user asks to stop all posting for now, put publishing on hold, or start again. |
-| `publish_post` | publish | **Publish or schedule a draft.** Use when the user asks to post, publish or share a saved draft: right now, at a specific date and time, or in an account's next free posting slot. |
-| `repeat_post` | publish | **Repeat a post on a schedule.** Use when the user asks to repeat, recycle or re-share a post on a schedule, for example every 7 days or 5 times. |
+| `list_posts` | read | **List posts, problems, repeats and batches.** Use when the user asks to see the posts they drafted, scheduled or published through A1 Lane, what needs fixing, which posts repeat, or how a batch is going. |
+| `manage_accounts` | publish (disconnect: accounts) | **Pause, resume or disconnect accounts.** Use when the user asks to stop all posting for now, put publishing on hold, start again, or disconnect a social account. |
+| `publish_post` | publish (approval: write) | **Publish, schedule or send a draft for approval.** Use when the user asks to post, publish or share a saved draft: right now, at a specific date and time, or in an account's next free posting slot; or, in a workspace that needs approval, to send it to their team, client or manager for sign-off. |
+| `remove_post` | publish (delete_record: write) | **Cancel, take down or delete a post.** Use when the user asks to cancel or unschedule a post, take a published post down, or delete a post. |
+| `repeat_post` | publish | **Repeat a post on a schedule.** Use when the user asks to repeat, recycle or re-share a post on a schedule (for example every 7 days or 5 times), or to pause, resume or stop a repeating post. |
 | `reply_to_comment` | publish | **Reply to a comment on a post.** Use when the user asks to answer or reply to a comment on their own published post. |
-| `request_approval` | write | **Send a draft for approval.** Use when the user asks to send a draft to their team, client or manager for review or sign-off before it is posted. |
-| `resolve_attention` | publish | **Fix a delivery problem.** Use when the user asks to fix, retry or re-send a failed post, or to clear an item from list_attention_items. |
+| `report_problem` | read | **Report a problem to the A1 Lane team.** Use when one of this server's tools failed, returned something unexpected, lacks a capability the user needed, or its instructions were unclear, after you have followed the error's fix_hint. |
+| `resolve_attention` | publish | **Fix a delivery problem.** Use when the user asks to fix, retry or re-send a failed post, or to clear an item from list_posts view attention. |
+| `save_draft` | write | **Create, edit or copy a social post draft.** Use when the user asks to write, prepare, cross-post or set up a social media post, video, carousel or thread, to change a draft or a scheduled post before it starts delivering, or to start a new post from an existing one. |
 | `search_instagram_audio` | read | **Search Instagram audio for a Reel.** Use when the user wants music, a trending sound or other audio on an Instagram Reel. |
-| `set_repeat_state` | publish | **Pause, resume or stop a repeat.** Use when the user asks to pause, hold, resume, restart, stop or cancel a repeating post. |
 | `submit_batch` | write | **Create many posts at once.** Use when the user wants several different posts set up at once: a week of content, a content calendar or a bulk schedule. |
-| `unpublish_post` | publish | **Delete a live post from platforms.** Use when the user asks to take a published post down or delete it from a platform. |
-| `update_draft_settings` | write | **Edit a draft or scheduled post.** Use when the user asks to change a draft or a scheduled post before it starts delivering: its caption, media, accounts, per-platform options (for example YouTube privacy or tags), scheduled time, thread parts, first comment or UTM tags. |
 
 ## Scopes
 
@@ -312,12 +294,12 @@ includes `write`; `accounts` adds only account disconnection.
 
 | Scope | Tools visible | What it adds |
 |---|---|---|
-| `read` | 20 | look only: accounts, posts, receipts, media and the plan. Nothing is changed. |
-| `write` | 28 | adds drafting: create, edit and copy draft posts, delete post records, ask for approval and add media. Nothing is queued or published. |
-| `publish` | 36 | adds publishing: queue, schedule and publish posts, retry deliveries, cancel or take down posts, and pause the workspace. |
-| `accounts` | 21 | adds account management: disconnecting the workspace's social accounts. Publishing does not include it. |
+| `read` | 10 | look only: accounts, posts, receipts, media and the plan. Nothing is changed. |
+| `write` | 15 | adds drafting: create, edit and copy draft posts, delete post records, ask for approval and add media. Nothing is queued or published. |
+| `publish` | 19 | adds publishing: queue, schedule and publish posts, retry deliveries, cancel or take down posts, and pause the workspace. |
+| `accounts` | 11 | adds account management: disconnecting the workspace's social accounts. Publishing does not include it. |
 
-All four scopes together: 37 tools.
+All four scopes together: 19 tools.
 
 ## Links
 

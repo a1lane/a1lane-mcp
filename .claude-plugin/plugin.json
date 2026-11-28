@@ -1,8 +1,8 @@
 {
   "name": "a1-lane",
   "displayName": "A1 Lane",
-  "version": "1.13.1",
-  "description": "Draft, schedule and publish social posts and videos, with a delivery receipt for every destination. Bundles the hosted A1 Lane MCP server (37 tools) with workflow skills. Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.",
+  "version": "1.15.0",
+  "description": "Draft, schedule and publish social posts and videos, with a delivery receipt for every destination. Bundles the hosted A1 Lane MCP server with workflow skills and slash commands. Works today with YouTube, X, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). TikTok is in review. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.",
   "author": {
     "name": "A1Lane LLC",
     "url": "https://a1lane.ai",

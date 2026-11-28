@@ -1,7 +1,7 @@
 {
   "name": "a1lane",
-  "version": "1.13.1",
-  "description": "Draft, schedule and publish social posts and videos, with per-destination delivery receipts and platform read-back verification where available. Works today with YouTube, X, Pinterest, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage, LinkedIn personal profiles and Threads profiles (limited). TikTok is coming once each platform approves our app. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.",
+  "version": "1.15.0",
+  "description": "Draft, schedule and publish social posts and videos, with per-destination delivery receipts and platform read-back verification where available. Works today with YouTube, X, Pinterest, Threads, Bluesky, Mastodon, Discord and Telegram, plus Instagram professional accounts, Facebook Pages you manage and LinkedIn personal profiles (limited). TikTok is in review. Also connects DEV (unofficial), Slack (limited), Tumblr and Pixelfed (limited) for posting from AI assistants and the API.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "a1lane": {
